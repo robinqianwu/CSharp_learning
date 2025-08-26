@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>CSharp_learning</RootNamespace>
+    <AssemblyName>CSharp_learning</AssemblyName>
+    <StartupObject>Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.26" />
+    <PackageReference Include="System.Windows.Forms" Version="5.0.11" />
+  </ItemGroup>
+
+</Project>
