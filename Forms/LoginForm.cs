@@ -71,10 +71,9 @@ namespace CSharp_learning.Forms
             if (_databaseService.ValidateUser(txtUsername.Text, txtPassword.Text))
             {
                 MessageBox.Show("登录成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // TODO: 打开主窗体
-                // var mainForm = new MainForm();
-                // mainForm.Show();
-                // this.Hide();
+                var mainForm = new MainForm();
+                mainForm.Show();
+                this.Hide();
             }
             else
             {
@@ -82,10 +81,10 @@ namespace CSharp_learning.Forms
             }
         }
 
-        private TextBox txtUsername;
-        private TextBox txtPassword;
-        private Button btnLogin;
-        private Label lblUsername;
-        private Label lblPassword;
+        private TextBox txtUsername = null!;
+        private TextBox txtPassword = null!;
+        private Button btnLogin = null!;
+        private Label lblUsername = null!;
+        private Label lblPassword = null!;
     }
 }
