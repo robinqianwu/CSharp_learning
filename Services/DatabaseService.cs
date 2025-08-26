@@ -10,7 +10,8 @@ namespace CSharp_learning.Services
 
         public DatabaseService()
         {
-            connectionString = "Server=localhost;Database=library_db;Uid=admin;Pwd=admin123;";
+            // user and password are hardcoded here!!
+            connectionString = "Server=localhost;Database=library_db;Uid=eysler;Pwd=start;";
         }
 
         public MySqlConnection GetConnection()
