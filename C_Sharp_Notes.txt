@@ -25,3 +25,46 @@
 
 5. 类继承中，声明子类的话
 	public ChlidClass(p1, p2, p3) : base(p1, p2) {this.p3 = p3} 
+	
+6. Structure vs. Class
+	1. 值类型 vs. 引用类型
+	结构 (struct)
+		值类型，分配在 栈 (stack) 上（除非在堆对象中作为字段）。
+		赋值时是 复制整个对象。
+		超出作用域会立即销毁。
+	类 (class)
+		引用类型，分配在 堆 (heap) 上。
+		赋值时是 复制引用，多个变量可能指向同一个对象。
+		由 GC (垃圾回收器) 管理生命周期。
+
+	2. 内存分配和性能
+	结构 (struct)
+		适合小型、数据量少的对象（如二维坐标 Point，复数 Complex）。
+		在栈上分配和销毁，性能高，不需要 GC。
+		但在复制时会整体复制，可能影响性能（如果数据量很大）。
+	类 (class)
+		适合复杂、需要继承或多态的对象。
+		在堆上分配，由 GC 管理。
+		引用传递性能更优，适合大对象。
+	
+	Example:
+	Structure Point	
+		Point p1 = new Point(1, 2);
+		Point p2 = p1;   // 值复制
+		p2.X = 5;
+		Console.WriteLine(p1.X); // 输出 1，不受影响
+		
+	Class Person
+		Person person1 = new Person("Tom", 20);
+		Person person2 = person1;  // 引用复制
+		person2.Name = "Jerry";
+		Console.WriteLine(person1.Name); // 输出 Jerry，同一个对象
+
+7. Class Attribute的一些写法
+	public class Person	{
+		// 公开读取，但只能在类内部修改
+		public string Name { get; private set; }
+		// 只能类内读取，外部可以写（几乎不用，容易误用）
+		public int Age { private get; set; }
+	}
+	默认情况下，属性的 get 和 set 的访问级别 = 属性的访问级别。
