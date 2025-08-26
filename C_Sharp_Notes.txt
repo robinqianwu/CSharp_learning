@@ -68,3 +68,105 @@
 		public int Age { private get; set; }
 	}
 	默认情况下，属性的 get 和 set 的访问级别 = 属性的访问级别。
+	
+8. delegate, new DatenType in C#
+	什么是 delegate
+	delegate 是一种类型，用来 存放方法的引用。
+	可以把方法当作变量一样传递、保存、调用。
+	用于 回调机制、事件处理、解耦代码。
+
+	✅ 基本示例
+	// 声明一个 delegate 类型，返回 int，接收两个 int
+	public delegate int MyDelegate(int a, int b);
+	class Program
+	{
+		// 定义两个方法
+		static int Add(int x, int y) => x + y;
+		static int Multiply(int x, int y) => x * y;
+
+		static void Main()
+		{
+			// 用 delegate 指向不同的方法
+			MyDelegate d1 = Add;
+			MyDelegate d2 = Multiply;
+
+			Console.WriteLine(d1(2, 3)); // 输出 5
+			Console.WriteLine(d2(2, 3)); // 输出 6
+		}
+	}
+	🔎 特点
+	类型安全
+	delegate 的签名（参数 & 返回类型）必须和目标方法一致。
+	比 C/C++ 的函数指针更安全。
+	多播委托 (Multicast Delegate)
+	一个 delegate 可以同时引用多个方法。
+	调用时会依次执行。
+
+	MyDelegate d = Add;
+	d += Multiply;  // 追加方法
+	d(2, 3);        // 先调用 Add，再调用 Multiply
+
+
+	和事件 (event) 密切相关
+	C# 的事件就是基于 delegate 封装的。
+	你在 WinForms/WPF/ASP.NET 里写的 button.Click += Handler 背后就是 delegate。
+
+	✅ 常见用法
+	1. 回调 (Callback)
+	void DoWork(MyDelegate callback)
+	{
+		Console.WriteLine("Working...");
+		int result = callback(5, 10); // 调用回调
+		Console.WriteLine("Result: " + result);
+	}
+
+	DoWork(Add);      // 传入方法
+	DoWork(Multiply); // 传入方法
+
+	2. 匿名方法 + Lambda
+	C# 2.0 以后，不用每次都写 delegate 声明方法，可以用 匿名方法 或 Lambda 表达式：
+
+	MyDelegate d = delegate(int x, int y) { return x - y; };
+	MyDelegate d2 = (x, y) => x / y;
+
+	3. 内置泛型委托
+	C# 提供了常用的委托类型，不用每次都自己写：
+
+	Action<T> → 没有返回值的方法
+	Func<T, TResult> → 有返回值的方法
+	Predicate<T> → 返回 bool 的方法
+
+	Action<string> printer = s => Console.WriteLine(s);
+	printer("Hello");
+
+	Func<int, int, int> adder = (a, b) => a + b;
+	Console.WriteLine(adder(2, 3));
+
+	Predicate<int> isEven = x => x % 2 == 0;
+	Console.WriteLine(isEven(4)); // true
+
+	📌 总结
+
+	delegate 是 方法的引用类型。
+	让方法可以 作为参数传递，实现 回调、事件、多播 等功能。
+	现代 C# 中，更多使用 lambda + Action/Func/Predicate，写法更简洁。
+
+9. 特性 (Attribute) 的一种，叫 Obsolete，用于 标记某个方法、类、属性等为过时
+	public class MyClass
+	{
+		[Obsolete("Use NewMethod instead")]
+		public void OldMethod()
+		{
+			Console.WriteLine("Old method");
+		}
+
+		public void NewMethod()
+		{
+			Console.WriteLine("New method");
+		}
+	}
+	
+	调用示例：
+		var obj = new MyClass();
+		obj.OldMethod(); // ⚠ 编译器提示：Use NewMethod instead
+		obj.NewMethod(); // ✅ 正常调用
