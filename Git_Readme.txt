@@ -85,3 +85,44 @@
 	git branch -M main
 	git remote add origin https://github.com/robinqianwu/Angular_learning.git
 	git push -u origin main
+
+4. checkout an Git repository into local
+	mkdir localFolder
+	git clone https://github.com/robinqianwu/Angular_learning localFolder
+
+5. Git 覆盖本地修改常用命令速查表
+🔹 放弃工作区未暂存的修改（还没 git add）
+	git checkout -- <文件名>
+	git checkout -- .
+👉 回到最近一次提交的状态。
+
+🔹 放弃暂存区的修改（已 git add，但未 commit）
+	git reset HEAD <文件名>
+	git checkout -- <文件名>
+👉 先把文件移出暂存区，再丢弃修改。
+
+	放弃所有：
+	git reset HEAD .
+	git checkout -- .
+
+🔹 丢弃本地所有修改和提交，强制和远程同步
+	git fetch --all
+	git reset --hard origin/<分支名>
+👉 本地会直接回到远程分支的最新状态，危险操作（不可恢复）。
+
+🔹 想更新远程代码，但保留本地修改
+	git stash
+	git pull
+	git stash pop
+👉 修改会临时保存，拉取远程更新后再恢复。
+
+🔹 回到指定提交（历史版本）
+	git reset --hard <commit-id>
+👉 完全回到某个历史提交（本地提交会丢失）。
+
+📌 小技巧：
+不确定要不要丢弃修改时，可以先查看：
+git status
+
+丢弃前想保存一份，以免后悔，可以：
+git stash
