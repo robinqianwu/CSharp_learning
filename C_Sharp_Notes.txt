@@ -170,3 +170,33 @@
 		var obj = new MyClass();
 		obj.OldMethod(); // ⚠ 编译器提示：Use NewMethod instead
 		obj.NewMethod(); // ✅ 正常调用
+
+10. 🔹 C# 命名约定（简化版）
+	元素						约定									示例
+	类 / 接口 / 枚举 / 结构体	PascalCase（大写开头，每个单词首字母大写）	Customer, OrderDetail, ILogger
+	方法						PascalCase								GetUserName(), CalculateTotal()
+	属性						PascalCase								FirstName, IsActive
+	字段（私有变量）			camelCase（小写开头）或 _camelCase（推荐）	_count, _connectionString
+	局部变量 / 方法参数			camelCase								 int totalCount, string userName
+	常量 / readonly static 字段	PascalCase								MaxItems, DefaultTimeout
+	命名空间					PascalCase								MyApp.DataAccess
+
+11. C# Controller🔹 命名规则
+	必须以 Controller 结尾
+		框架会通过反射自动识别哪些类是 Controller。
+		例如：HomeController, UserController, OrderController。
+		如果你写成 HomeCtrl，ASP.NET Core 默认就不会把它当成 Controller。
+	使用 PascalCase（大写开头，每个单词首字母大写）
+		例如：ProductController ✅
+		不要写成 productcontroller ❌
+	一个 Controller 对应一个资源或业务领域
+		UserController → 处理用户相关 API
+		ProductController → 处理产品相关 API
+		不建议写成 UtilsController 这种大杂烩。
+	Controller 内的方法（Action）
+		方法名用 PascalCase
+			例如：GetAll(), Create(), Update(), Delete()
+		常见 REST 风格：
+			GET /users → UserController.GetAll()
+			GET /users/{id} → UserController.GetById(int id)
+			POST /users → UserController.Create(User user)

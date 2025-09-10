@@ -22,3 +22,7 @@ DELETE /api/book/{id} - 删除图书
 
 API服务器已经启动并在运行。让我们在新的终端中测试登录API：
 可参看loginTestSuccessful.png
+
+在启动Development Profile运行时，可以启动SwaggerUI来检查API支持的Url
+http://localhost:5000/swagger
+从而替代postman，需要关闭httpsRedirection和CORS

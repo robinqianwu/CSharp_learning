@@ -15,12 +15,6 @@ namespace CSharp_learning.Controllers
         private readonly DatabaseService _databaseService;
         private readonly IConfiguration _configuration;
 
-        //public AuthController(DatabaseService databaseService, IConfiguration configuration)
-        //{
-        //   _databaseService = databaseService;
-        //   _configuration = configuration;
-        //}
-
         private readonly ILogger<AuthController> _logger;
 
         public AuthController(DatabaseService databaseService, IConfiguration configuration, ILogger<AuthController> logger)
@@ -51,9 +45,9 @@ namespace CSharp_learning.Controllers
             var response = new LoginResponse
             {
                 Token = token,
-                Username = user.Username,
+                Username = user.Username ?? string.Empty,
                 UserId = user.Id,
-                Role = user.Role
+                Role = user.Role ?? string.Empty
             };
 
             return Ok(response);
@@ -67,8 +61,8 @@ namespace CSharp_learning.Controllers
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.Username ?? string.Empty),
+                new Claim(ClaimTypes.Role, user.Role ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
