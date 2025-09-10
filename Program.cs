@@ -38,8 +38,7 @@ builder.Services.AddCors(options =>
         {
             builder.WithOrigins("http://localhost:4200")   // 允许来自Angular开发服务器的请求
                    .AllowAnyHeader()                       // 允许任何请求头
-                   .AllowAnyMethod()                       // 允许任何HTTP方法
-                   .AllowCredentials();                    // 允许发送凭证
+                   .AllowAnyMethod();                       // 允许任何HTTP方法
         });
 });
 
@@ -54,7 +53,7 @@ if (app.Environment.IsDevelopment())    // 如果是开发环境
     app.UseSwaggerUI();                 // 启用Swagger UI界面
 }
 
-app.UseHttpsRedirection();              // 启用HTTPS重定向
+//app.UseHttpsRedirection();              // 启用HTTPS重定向
 app.UseCors();                          // 启用CORS中间件
 app.UseAuthentication();                // 启用认证中间件
 app.UseAuthorization();                 // 启用授权中间件

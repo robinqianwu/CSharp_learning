@@ -200,3 +200,5 @@
 			GET /users → UserController.GetAll()
 			GET /users/{id} → UserController.GetById(int id)
 			POST /users → UserController.Create(User user)
+
+11. "ASPNETCORE_ENVIRONMENT": "Development" or "Staging" or "Production"
