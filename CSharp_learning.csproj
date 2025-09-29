@@ -24,5 +24,11 @@
     <EmbeddedResource Remove="DummyProject\**" />
     <None Remove="DummyProject\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="DllProject\**" />
+    <Content Remove="DllProject\**" />
+    <EmbeddedResource Remove="DllProject\**" />
+    <None Remove="DllProject\**" />
+  </ItemGroup>
 
 </Project>

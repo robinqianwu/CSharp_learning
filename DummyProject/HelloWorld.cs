@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
+using NameGenerator;
 
 namespace CSharp_learning.DummyProject
 {
@@ -98,11 +99,27 @@ namespace CSharp_learning.DummyProject
             addInterestButton.Click += AddInterestButton_Click;
 
             // 将所有控件添加到窗体
+            // 创建随机英文名字生成按钮
+            var generateNameButton = new Button
+            {
+                Text = "生成随机英文名字",
+                Location = new Point(20, 380),
+                Size = new Size(340, 25)
+            };
+            generateNameButton.Click += (s, e) =>
+            {
+                string randomName = NameGenerator.EnglishNameGenerator.GenerateRandomName();
+                nameTextBox.Text = randomName;
+                MessageBox.Show($"已生成随机英文名字: {randomName}", "名字生成成功",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+
             Controls.AddRange(new Control[] {
                 nameLabel, nameTextBox,
                 ageLabel, ageNumericUpDown,
                 interestsLabel, interestsListBox,
-                newInterestTextBox, addInterestButton
+                newInterestTextBox, addInterestButton,
+                generateNameButton
             });
 
             // 设置初始焦点到兴趣输入框

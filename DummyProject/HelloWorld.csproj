@@ -8,4 +8,9 @@
     <RootNamespace>CSharp_learning.DummyProject</RootNamespace>
     <AssemblyName>HelloWorld</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NameGenerator">
+      <HintPath>..\DllProject\NameGenerator\bin\Debug\net6.0\NameGenerator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
