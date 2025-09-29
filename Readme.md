@@ -32,3 +32,4 @@ http://localhost:5000/swagger
     -- they are isolated with each, can be build and run separately
         --- 'dotnet build' in CSharp_learning will build both
         --- 'dotnet run' in different folder will start the differetn project, or can use 'dotnet run --project .\DummyProject\HelloWorld.csproj' to start the desired project.
+- add a DllProject to generate .dll file, which will provide a random english name, that name will be used in DummyProject Form, used for a user name.
