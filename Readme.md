@@ -26,3 +26,9 @@ API服务器已经启动并在运行。让我们在新的终端中测试登录AP
 在启动Development Profile运行时，可以启动SwaggerUI来检查API支持的Url
 http://localhost:5000/swagger
 从而替代postman，需要关闭httpsRedirection和CORS
+
+2025.09.29:
+- add a dummy windows project, HelloWorld project into current web project CSharp_learning
+    -- they are isolated with each, can be build and run separately
+        --- 'dotnet build' in CSharp_learning will build both
+        --- 'dotnet run' in different folder will start the differetn project, or can use 'dotnet run --project .\DummyProject\HelloWorld.csproj' to start the desired project.

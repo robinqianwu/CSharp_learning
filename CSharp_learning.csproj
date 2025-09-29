@@ -17,4 +17,12 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
   </ItemGroup>
 
+  <!-- Exclude DummyProject folder because it is a separate desktop project with its own csproj file -->
+  <ItemGroup>
+    <Compile Remove="DummyProject\**" />
+    <Content Remove="DummyProject\**" />
+    <EmbeddedResource Remove="DummyProject\**" />
+    <None Remove="DummyProject\**" />
+  </ItemGroup>
+
 </Project>
