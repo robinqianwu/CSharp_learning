@@ -18,6 +18,13 @@ namespace CSharp_learning.DummyProject
         {
             InitializeComponents();
             LoadDefaultInterests();
+            
+            // 窗体加载时自动生成随机名字
+            string randomName = NameGenerator.EnglishNameGenerator.GenerateRandomName();
+            if (nameTextBox != null)
+            {
+                nameTextBox.Text = randomName;
+            }
         }
 
         private void InitializeComponents()
@@ -37,9 +44,12 @@ namespace CSharp_learning.DummyProject
             nameTextBox = new TextBox
             {
                 Location = new Point(80, 20),
-                Size = new Size(200, 20),
-                PlaceholderText = "Chali"
+                Size = new Size(200, 20)
             };
+            
+            // 设置随机生成的名字
+            string randomName = NameGenerator.EnglishNameGenerator.GenerateRandomName();
+            nameTextBox.Text = randomName;
 
             // 创建年龄输入区域
             var ageLabel = new Label
