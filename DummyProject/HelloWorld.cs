@@ -113,7 +113,7 @@ namespace CSharp_learning.DummyProject
             {
                 interestsListBox.Items.Add(newInterest);
                 newInterestTextBox.Clear();
-                MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功", 
+                MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功添加， 现在有 " + interestsListBox.Items.Count + " 个兴趣爱好", 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
