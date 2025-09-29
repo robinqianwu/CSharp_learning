@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace CSharp_learning.DummyProject
 {
@@ -35,7 +36,8 @@ namespace CSharp_learning.DummyProject
             nameTextBox = new TextBox
             {
                 Location = new Point(80, 20),
-                Size = new Size(200, 20)
+                Size = new Size(200, 20),
+                PlaceholderText = "Chali"
             };
 
             // 创建年龄输入区域
@@ -75,6 +77,17 @@ namespace CSharp_learning.DummyProject
                 Location = new Point(20, 340),
                 Size = new Size(200, 20)
             };
+            newInterestTextBox.KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    e.Handled = true; // 防止发出蜂鸣声
+                    if (addInterestButton != null)
+                    {
+                        AddInterestButton_Click(addInterestButton, EventArgs.Empty);
+                    }
+                }
+            };
 
             addInterestButton = new Button
             {
@@ -91,6 +104,9 @@ namespace CSharp_learning.DummyProject
                 interestsLabel, interestsListBox,
                 newInterestTextBox, addInterestButton
             });
+
+            // 设置初始焦点到兴趣输入框
+            this.ActiveControl = newInterestTextBox;
         }
 
         private void LoadDefaultInterests()
@@ -106,15 +122,21 @@ namespace CSharp_learning.DummyProject
             interestsListBox.Items.AddRange(defaultInterests);
         }
 
-        private void AddInterestButton_Click(object sender, EventArgs e)
+        private void AddInterestButton_Click(object? sender, EventArgs e)
         {
             string newInterest = newInterestTextBox.Text.Trim();
             if (!string.IsNullOrEmpty(newInterest))
             {
                 interestsListBox.Items.Add(newInterest);
                 newInterestTextBox.Clear();
-                MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功添加， 现在有 " + interestsListBox.Items.Count + " 个兴趣爱好", 
+                MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功添加， 现在有 " + interestsListBox.Items.Count + " 个兴趣爱好",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                // 不同类型的日志输出
+                var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                Console.WriteLine($"[{timestamp}] Console: 添加了新兴趣 {newInterest}"); // 控制台输出
+                Debug.WriteLine($"[{timestamp}] Debug: 添加了新兴趣 {newInterest}"); // Debug输出
+                Trace.WriteLine($"[{timestamp}] Trace: 添加了新兴趣 {newInterest}"); // Trace输出
             }
         }
     }
@@ -124,9 +146,22 @@ namespace CSharp_learning.DummyProject
         [STAThread]
         static void Main()
         {
+            // 设置Trace输出到文件（Debug输出也会进入这个监听器）
+            TextWriterTraceListener traceListener = new TextWriterTraceListener("debug_trace.log");
+            Trace.Listeners.Add(traceListener);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserFormGUI());
+            try 
+            {
+                Application.Run(new UserFormGUI());
+            }
+            finally
+            {
+                // 确保所有日志都被写入文件
+                Trace.Flush();
+                traceListener.Close();
+            }
         }
     }
 }
