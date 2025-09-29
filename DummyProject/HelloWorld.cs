@@ -7,11 +7,11 @@ namespace CSharp_learning.DummyProject
 {
     public class UserFormGUI : Form
     {
-        private TextBox nameTextBox;
-        private NumericUpDown ageNumericUpDown;
-        private ListBox interestsListBox;
-        private TextBox newInterestTextBox;
-        private Button addInterestButton;
+        private TextBox? nameTextBox;
+        private NumericUpDown? ageNumericUpDown;
+        private ListBox? interestsListBox;
+        private TextBox? newInterestTextBox;
+        private Button? addInterestButton;
 
         public UserFormGUI()
         {
@@ -119,24 +119,30 @@ namespace CSharp_learning.DummyProject
                 "摄影"
             };
 
-            interestsListBox.Items.AddRange(defaultInterests);
+            if (interestsListBox != null)
+            {
+                interestsListBox.Items.AddRange(defaultInterests);
+            }
         }
 
         private void AddInterestButton_Click(object? sender, EventArgs e)
         {
-            string newInterest = newInterestTextBox.Text.Trim();
-            if (!string.IsNullOrEmpty(newInterest))
+            if (newInterestTextBox != null)
             {
-                interestsListBox.Items.Add(newInterest);
-                newInterestTextBox.Clear();
-                MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功添加， 现在有 " + interestsListBox.Items.Count + " 个兴趣爱好",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                // 不同类型的日志输出
-                var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                Console.WriteLine($"[{timestamp}] Console: 添加了新兴趣 {newInterest}"); // 控制台输出
-                Debug.WriteLine($"[{timestamp}] Debug: 添加了新兴趣 {newInterest}"); // Debug输出
-                Trace.WriteLine($"[{timestamp}] Trace: 添加了新兴趣 {newInterest}"); // Trace输出
+                string newInterest = newInterestTextBox.Text.Trim();
+                if (!string.IsNullOrEmpty(newInterest) && interestsListBox != null)
+                {
+                    interestsListBox.Items.Add(newInterest);
+                    newInterestTextBox.Clear();
+                    MessageBox.Show("已添加新的兴趣爱好: " + newInterest, "成功添加， 现在有 " + interestsListBox.Items.Count + " 个兴趣爱好",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // 不同类型的日志输出
+                    var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    Console.WriteLine($"[{timestamp}] Console: 添加了新兴趣 {newInterest}"); // 控制台输出
+                    Debug.WriteLine($"[{timestamp}] Debug: 添加了新兴趣 {newInterest}"); // Debug输出
+                    Trace.WriteLine($"[{timestamp}] Trace: 添加了新兴趣 {newInterest}"); // Trace输出
+                }
             }
         }
     }
